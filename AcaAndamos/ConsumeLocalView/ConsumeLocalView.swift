@@ -96,7 +96,7 @@ struct ConsumeLocalView: View {
                     }
                     
                     // Negocios destacados (Carousel)
-                    Text("Destacados en MH")
+                    Text("Destacados en Miguel Hidalgo")
                         .font(.title3)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -129,7 +129,7 @@ struct ConsumeLocalView: View {
             }
             .navigationTitle("Consume Local")
             .navigationBarTitleDisplayMode(.inline)
-            .background(Color(.systemGroupedBackground))
+            .background(Color(.pink.opacity(0.2)))
         }
     }
 }
@@ -173,7 +173,7 @@ struct CategoryPill2: View {
                 .padding(.horizontal, 15)
                 .padding(.vertical, 8)
                 .foregroundColor(isSelected ? .white : Color("MHBlue"))
-                .background(isSelected ? Color("MHBlue") : Color(.systemBackground))
+                .background(isSelected ? Color(.green) : Color(.systemBackground))
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)

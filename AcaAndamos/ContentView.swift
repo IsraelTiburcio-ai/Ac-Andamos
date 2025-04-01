@@ -10,84 +10,88 @@ import CoreLocation
 struct ContentView: View {
     @State private var showingNotifications = false
     @StateObject private var locationManager = LocationManager()
-    
+    @State private var weatherIcon = "sun.max.fill"
+    @State private var temperature = "24°C"
     var body: some View {
-        VStack(spacing: 0) {
-            // Barra superior
-            HStack {
-                // Botón de notificaciones
-                Button(action: {
-                    showingNotifications.toggle()
-                }) {
-                    Image(systemName: "bell.fill")
-                        .foregroundColor(.white)
-                        .padding()
-                }
-                .sheet(isPresented: $showingNotifications) {
-                    NotificationsView()
-                }
-                
-                Spacer()
-                
-                // Mostrar ubicación actual
-                if let location = locationManager.location {
-                    Text("\(location.coordinate.latitude.roundTo(places: 4)), \(location.coordinate.longitude.roundTo(places: 4))")
-                        .foregroundColor(.white)
-                        .font(.caption)
-                } else {
-                    VStack {
-                        Text("Obteniendo ubicación...")
-                            .foregroundColor(.white)
-                            .font(.caption)
-                        
-                        if locationManager.authorizationStatus == .denied {
-                            Text("Activa ubicación en Ajustes")
-                                .font(.caption2)
-                                .foregroundColor(.yellow)
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                // Icono de ubicación (balance visual)
-                Image(systemName: "location.fill")
-                    .foregroundColor(.white)
-                    .padding()
-                    .opacity(0)
-            }
-            .frame(maxWidth: .infinity)
-            .background(Color.black)
+        ZStack {
+            // Fondo rosa en toda la pantalla
+            Color.pink.opacity(0.2).edgesIgnoringSafeArea(.all)
             
-            // Contenido principal con tabs
-            TabView {
-                NoticiasView()
-                    .tabItem {
-                        Image(systemName: "newspaper.fill")
-                        Text("Noticias")
+            VStack(spacing: 0) {
+                // Barra superior
+                HStack {
+                    HStack {
+                        HStack(spacing: 8) {
+                            Image(systemName: weatherIcon)
+                                .foregroundColor(.yellow)
+                                .font(.title3)
+                                
+                            Text(temperature)
+                                .foregroundColor(.black)
+                                .bold()
+                                .font(.title3)
+                        }
+                        .padding(10)
+//                        .background(.white)
+                        .cornerRadius(10)
                     }
-                
-                AvisosyApoyos()
-                    .tabItem {
+                    .padding(20)
+                    .background(.pink.opacity(0.001))
+                    .cornerRadius(10)
+                    Spacer()
+                    // Botón de notificaciones
+                    Button(action: {
+                        showingNotifications.toggle()
+                    }) {
                         Image(systemName: "bell.fill")
-                        Text("Avisos")
+                            .foregroundColor(.blue)
+                            .padding()
                     }
+                    .sheet(isPresented: $showingNotifications) {
+                        NotificationsView()
+                            .background(Color.pink.opacity(0.1))
+                    }
+                    
+            
+                    
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.pink.opacity(0.01))
                 
-                ConsumeLocalView()
-                    .tabItem {
-                        Image(systemName: "bag.fill")
-                        Text("Consume Local")
-                    }
-                
-                DondeIrView()
-                    .tabItem {
-                        Image(systemName: "figure.walk")
-                        Text("¿A dónde ir?")
-                    }
+                // Contenido principal con tabs
+                TabView {
+                    NoticiasView()
+                        .tabItem {
+                            Image(systemName: "newspaper.fill")
+                            Text("Noticias")
+                        }
+                        .background(Color.pink.opacity(0.2))
+                    
+                    AvisosyApoyos()
+                        .tabItem {
+                            Image(systemName: "bell.fill")
+                            Text("Avisos")
+                        }
+                        .background(Color.pink.opacity(0.2))
+                    
+                    ConsumeLocalView()
+                        .tabItem {
+                            Image(systemName: "bag.fill")
+                            Text("Consume Local")
+                        }
+                        .background(Color.pink.opacity(0.2))
+                    
+                    DondeIrView()
+                        .tabItem {
+                            Image(systemName: "figure.walk")
+                            .foregroundStyle(.pink)
+                            Text("¿A dónde ir?")
+                        }
+                        .background(Color.pink.opacity(0.2))
+                }
+               
             }
         }
-        .background(.black)
-        .edgesIgnoringSafeArea(.all)
         .onAppear {
             locationManager.requestPermission()
         }
@@ -106,6 +110,7 @@ struct NotificationsView: View {
                     message: "Contingencia ambiental activa hoy",
                     time: "Hace 1 hora"
                 )
+                .listRowBackground(Color.pink.opacity(0.1))
                 
                 NotificationRow2(
                     icon: "calendar",
@@ -114,6 +119,7 @@ struct NotificationsView: View {
                     message: "Festival de primavera este fin de semana",
                     time: "Ayer"
                 )
+                .listRowBackground(Color.pink.opacity(0.1))
                 
                 NotificationRow2(
                     icon: "wrench.fill",
@@ -122,6 +128,7 @@ struct NotificationsView: View {
                     message: "Cierre parcial de Línea 1 del Metro",
                     time: "20/04/24"
                 )
+                .listRowBackground(Color.pink.opacity(0.1))
             }
             .navigationTitle("Notificaciones")
             .navigationBarTitleDisplayMode(.inline)
@@ -130,6 +137,7 @@ struct NotificationsView: View {
                     Button("Listo") {}
                 }
             }
+            .background(Color.pink.opacity(0.2))
         }
     }
 }
@@ -146,13 +154,14 @@ struct NotificationRow2: View {
             Image(systemName: icon)
                 .foregroundColor(.white)
                 .frame(width: 40, height: 40)
-                .background(color)
+                .background(.pink)
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.subheadline)
                     .bold()
+                    .foregroundColor(.primary)
                 
                 Text(message)
                     .font(.caption)
@@ -221,6 +230,8 @@ extension Double {
         return (self * divisor).rounded() / divisor
     }
 }
+
+
 
 #Preview {
     ContentView()

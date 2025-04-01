@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Parques perfectos para hacer un picnic ¡cerca de CDMX! - Dónde Ir_ Guía de México y CDMX ¿qué hacer hoy?.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

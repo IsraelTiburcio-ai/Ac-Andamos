@@ -99,13 +99,13 @@ struct CDMXNewsView: View {
                 }
                 .padding(.bottom, 20)
             }
-            .background(Color("CDMXBackground"))
+            .background(Color(.pink.opacity(0.2)))
             .navigationBarHidden(true)
             .sheet(isPresented: $showNotifications) {
                 NotificationsView()
             }
         }
-        .accentColor(Color("CDMXBlue"))
+        .accentColor(Color(.blue))
     }
     
     // MARK: - Subviews
@@ -114,53 +114,31 @@ struct CDMXNewsView: View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Image("escudo_cdmx") // Añadir este asset a tu proyecto
+                    Image("CDMX") // Añadir este asset a tu proyecto
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 30)
+                        .frame(height: 50)
+                        .cornerRadius(50)
                     
                     Text("CDMX Informa")
                         .font(.title2)
                         .fontWeight(.bold)
-                        .foregroundColor(Color("CDMXBlueDark"))
+                        .foregroundColor(Color(.black))
                 }
                 
                 Text("Información oficial del Gobierno de la Ciudad de México")
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.black)
             }
             
             Spacer()
             
-            HStack(spacing: 20) {
-                Button(action: {
-                    showFilters.toggle()
-                }) {
-                    Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(Color("CDMXBlue"))
-                }
-                
-                Button(action: {
-                    showNotifications.toggle()
-                }) {
-                    ZStack {
-                        Image(systemName: "bell.fill")
-                            .font(.title2)
-                            .foregroundColor(Color("CDMXBlue"))
-                        
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 8, height: 8)
-                            .offset(x: 8, y: -8)
-                    }
-                }
-            }
+
         }
         .padding(.horizontal, 20)
         .padding(.top, 10)
         .padding(.bottom, 15)
-        .background(Color(.systemBackground))
+       
     }
     
     private var categoriesView: some View {
@@ -236,12 +214,12 @@ struct CategoryPill: View {
                 .font(.system(size: 14, weight: .medium))
                 .padding(.horizontal, 15)
                 .padding(.vertical, 8)
-                .foregroundColor(isSelected ? .white : Color("CDMXBlueDark"))
-                .background(isSelected ? Color("CDMXBlue") : Color(.systemBackground))
+                .foregroundColor(isSelected ? .white : Color(.black))
+                .background(isSelected ? Color(.gray) : Color(.red.opacity(0.5)))
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color("CDMXBlue"), lineWidth: isSelected ? 0 : 1)
+                        .stroke(Color(.red), lineWidth: isSelected ? 0 : 1)
                 )
         }
         .buttonStyle(PlainButtonStyle())
@@ -256,7 +234,7 @@ struct NewsCard: View {
         VStack(alignment: .leading, spacing: 0) {
             // Imagen con categoría
             ZStack(alignment: .topLeading) {
-                Image(noticia.imagen)
+                Image("Concierto1")
                     .resizable()
                     .scaledToFill()
                     .frame(height: 180)
@@ -287,16 +265,27 @@ struct NewsCard: View {
                         .foregroundColor(.secondary)
                     
                     if noticia.destacada {
-                        Image(systemName: "star.fill")
-                            .font(.system(size: 10))
-                            .foregroundColor(Color("CDMXBlue"))
+                        HStack{
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color.yellow)
+                                .bold()
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color.yellow)
+                                .bold()
+                            Image(systemName: "star.fill")
+                                .font(.system(size: 10))
+                                .foregroundColor(Color.yellow)
+                                .bold()
+                        }
                     }
                     
                     Spacer()
                     
                     Button(action: { isSaved.toggle() }) {
                         Image(systemName: isSaved ? "bookmark.fill" : "bookmark")
-                            .foregroundColor(isSaved ? Color("CDMXBlue") : .gray)
+                            .foregroundColor(isSaved ? Color(.red.opacity(0.5)) : .gray)
                     }
                 }
                 
@@ -312,7 +301,7 @@ struct NewsCard: View {
                 
                 HStack {
                     Image(systemName: "newspaper.fill")
-                        .foregroundColor(Color("CDMXBlue"))
+                        .foregroundColor(Color(.blue))
                     Text("Gobierno CDMX")
                         .font(.caption)
                         .foregroundColor(.secondary)
@@ -330,39 +319,6 @@ struct NewsCard: View {
     }
 }
 
-//struct NotificationsView: View {
-//    var body: some View {
-//        NavigationView {
-//            ScrollView {
-//                VStack(spacing: 0) {
-//                    ForEach(1...6, id: \.self) { index in
-//                        NotificationRow(title: notificationTitles[index-1],
-//                                       time: "Hace \(index) hora\(index > 1 ? "s" : "")",
-//                                       isUnread: index <= 2)
-//                    }
-//                }
-//            }
-//            .navigationTitle("Notificaciones")
-//            .navigationBarTitleDisplayMode(.inline)
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button("Listo") {
-//                        // Cerrar la vista
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    let notificationTitles = [
-//        "Nuevo programa de apoyo a comercios en tu alcaldía",
-//        "Alerta ambiental: Hoy no circula para holograma 1 y 2",
-//        "Actualización: Cierre parcial de Circuito Interior por obras",
-//        "Recordatorio: Pago de tenencia vehicular vence en 3 días",
-//        "Evento cultural: Festival de Primavera en Chapultepec",
-//        "Convocatoria: Becas para estudiantes de universidades públicas"
-//    ]
-//}
 
 struct NotificationRow: View {
     let title: String
@@ -374,14 +330,14 @@ struct NotificationRow: View {
             Image(systemName: isUnread ? "bell.fill" : "bell")
                 .foregroundColor(.white)
                 .frame(width: 40, height: 40)
-                .background(isUnread ? Color("CDMXBlue") : Color.gray)
+                .background(isUnread ? Color(.green) : Color.gray)
                 .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.subheadline)
                     .bold()
-                    .foregroundColor(isUnread ? .primary : .secondary)
+                    .foregroundColor(isUnread ? .red : .green)
                 
                 Text(time)
                     .font(.caption)
@@ -392,7 +348,7 @@ struct NotificationRow: View {
             
             if isUnread {
                 Circle()
-                    .fill(Color("CDMXBlue"))
+                    .fill(Color(.green))
                     .frame(width: 8, height: 8)
             }
         }
@@ -416,11 +372,7 @@ struct CDMXNews: Identifiable {
 
 // MARK: - Assets de Color para CDMX
 
-extension Color {
-    static let cdmxBlue = Color("CDMXBlue")
-    static let cdmxBlueDark = Color("CDMXBlueDark")
-    static let cdmxBackground = Color("CDMXBackground")
-}
+
 
 // MARK: - Preview
 

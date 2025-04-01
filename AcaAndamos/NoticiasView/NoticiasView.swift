@@ -14,18 +14,18 @@
 import SwiftUI
 
 struct NoticiasView: View {
-    @State private var selectedSection = "Local"
+    @State private var selectedSection = "Miguel Hidalgo"
     
     var body: some View {
         VStack {
             Picker("Sección", selection: $selectedSection) {
-                Text("Local").tag("Local")
-                Text("Estatal").tag("Estatal")
+                Text("Miguel Hidalgo").tag("Miguel Hidalgo")
+                Text("CDMX").tag("CDMX")
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding()
             
-            if selectedSection == "Local" {
+            if selectedSection == "Miguel Hidalgo" {
                 LocalNewsView()
             } else {
                 CDMXNewsView()

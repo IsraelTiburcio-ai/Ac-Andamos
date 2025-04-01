@@ -17,8 +17,7 @@ struct AvisosView: View {
                         .bold()
                         .font(.largeTitle)
                     Spacer()
-                    Image(systemName: "bell.and.waves.left.and.right.fill")
-                        .font(.title2)
+                   
                 }
                 Divider()
                 

@@ -3,7 +3,7 @@ import SwiftUI
 struct LocalNewsView: View {
     @State private var showNotifications = false
     @State private var showLocationSettings = false
-    @State private var currentLocation = "Miguel Hidalgo"
+    @State private var currentLocation = "CDMX"
     
     let noticias = [
         Noticia(titulo: "Nuevo programa de mantenimiento en parques",
@@ -45,7 +45,7 @@ struct LocalNewsView: View {
                 .padding(.bottom)
             }
             .navigationBarHidden(true)
-            .background(Color(.systemGroupedBackground))
+            .background(Color(.pink.opacity(0.2)))
             .sheet(isPresented: $showNotifications) {
                 NotificationsViewMH()
             }
@@ -53,7 +53,7 @@ struct LocalNewsView: View {
                 LocationSettingsView(location: $currentLocation)
             }
         }
-        .accentColor(Color("MHBlue")) // Color azul característico de MH
+        .accentColor(Color(.blue))
     }
     
     // MARK: - Subviews
@@ -61,17 +61,17 @@ struct LocalNewsView: View {
     private var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Tu Alcaldía")
+                Text("Miguel Hidalgo")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                 
                 HStack {
                     Image(systemName: "location.fill")
-                        .foregroundColor(Color("MHBlue"))
+                        .foregroundColor(.yellow)
                     Text(currentLocation)
                         .font(.subheadline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.black)
                 }
             }
             
@@ -82,26 +82,16 @@ struct LocalNewsView: View {
                 Button(action: {
                     showNotifications.toggle()
                 }) {
-                    ZStack {
-                        Image(systemName: "bell.fill")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color("MHBlue"))
-                        
-                        // Badge de notificaciones
-                        Circle()
-                            .fill(Color.red)
-                            .frame(width: 10, height: 10)
-                            .offset(x: 8, y: -8)
-                    }
+                    
                 }
                 
                 // Botón de configuración de ubicación
                 Button(action: {
                     showLocationSettings.toggle()
                 }) {
-                    Image(systemName: "gear")
+                    Image(systemName: "location.fill")
                         .font(.system(size: 20))
-                        .foregroundColor(Color("MHBlue"))
+                        .foregroundColor(.blue)
                 }
             }
         }
@@ -113,7 +103,7 @@ struct LocalNewsView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 15) {
                 ForEach(noticias.prefix(4)) { noticia in
-                    StoryCard(noticia: noticia)
+                    StoryCard(noticia: noticia, imageName: noticia.imagen)
                 }
             }
             .padding(.horizontal, 20)
@@ -170,7 +160,7 @@ struct NotificationRowMH: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Circle()
-                    .fill(notification.isUnread ? Color("MHBlue") : Color.gray)
+                    .fill(notification.isUnread ? Color(.red) : Color.gray)
                     .frame(width: 8, height: 8)
                 
                 Text(notification.title)
@@ -182,19 +172,19 @@ struct NotificationRowMH: View {
                 
                 Text(notification.time)
                     .font(.caption)
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.red)
             }
             
             Text(notification.message)
                 .font(.caption)
-                .foregroundColor(.secondary)
+                .foregroundColor(.blue)
                 .padding(.leading, 16)
             
             Divider()
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .background(notification.isUnread ? Color("MHBlue").opacity(0.05) : Color.clear)
+        .background(notification.isUnread ? Color(.green).opacity(0.05) : Color.gray.opacity(0.2))
     }
 }
 
@@ -208,7 +198,10 @@ struct MHNotification: Identifiable {
 
 struct LocationSettingsView: View {
     @Binding var location: String
-    let alcaldias = ["Miguel Hidalgo", "Cuauhtémoc", "Benito Juárez", "Coyoacán", "Álvaro Obregón"]
+    let alcaldias = ["Álvaro Obregón", "Azcapotzalco",
+                     "Benito Juárez","Coyoacán","Cuajimalpa de Morelos",
+                     "Cuauhtémoc","Gustavo A. Madero","Iztacalco",
+                     "Iztapalapa","La Magdalena Contreras", "Miguel Hidalgo","Milpa Alta","Tláhuac","Tlalpan","México Desconocido","Venustian Carranza","Xochimilco​"]
     
     var body: some View {
         NavigationView {
@@ -223,11 +216,11 @@ struct LocationSettingsView: View {
                                 Spacer()
                                 if location == alcaldia {
                                     Image(systemName: "checkmark")
-                                        .foregroundColor(Color("MHBlue"))
+                                        .foregroundColor(Color(.green))
                                 }
                             }
                         }
-                        .foregroundColor(.primary)
+                        .foregroundColor(.black)
                     }
                 }
             }
@@ -252,12 +245,12 @@ struct NoticiaPost: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top) {
-                Image("escudo_mh") // Logo de la alcaldía
+                Image("BJ") // Logo de la alcaldía
                     .resizable()
                     .scaledToFill()
                     .frame(width: 50, height: 50)
                     .clipShape(Circle())
-                    .overlay(Circle().stroke(Color("MHBlue"), lineWidth: 2))
+                    .overlay(Circle().stroke(Color(.blue), lineWidth: 2))
                 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(noticia.titulo)
@@ -295,7 +288,7 @@ struct NoticiaPost: View {
                 .padding(.bottom, 8)
                 .foregroundColor(.primary)
             
-            Image(noticia.imagen)
+            Image("Parque1")
                 .resizable()
                 .scaledToFill()
                 .frame(maxWidth: .infinity)
@@ -309,23 +302,6 @@ struct NoticiaPost: View {
                     )
                 )
             
-            HStack {
-                HStack(spacing: 2) {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .foregroundColor(Color("MHBlue"))
-                    Text("\(likeCount)")
-                        .font(.caption)
-                }
-                
-                Spacer()
-                
-                Text("\(Int.random(in: 1...15)) comentarios · \(Int.random(in: 1...10)) compartidos")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            .padding(.horizontal)
-            .padding(.top, 8)
-            
             Divider()
                 .padding(.top, 4)
             
@@ -335,20 +311,10 @@ struct NoticiaPost: View {
                     likeCount += isLiked ? 1 : -1
                 }) {
                     HStack {
-                        Image(systemName: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
-                            .foregroundColor(isLiked ? Color("MHBlue") : .gray)
-                        Text("Me gusta")
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
-                }
-                
-                Divider()
-                
-                Button(action: {}) {
-                    HStack {
-                        Image(systemName: "bubble.left")
-                        Text("Comentar")
+                        Image(systemName: isLiked ? "bookmark.fill" : "bookmark.fill")
+                            .foregroundColor(isLiked ? Color(.blue) : .gray)
+                        Text("Guardado")
+                            .foregroundStyle(.black)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
@@ -359,7 +325,9 @@ struct NoticiaPost: View {
                 Button(action: {}) {
                     HStack {
                         Image(systemName: "arrowshape.turn.up.right")
-                        Text("Compartir")
+                            .foregroundStyle(.black)
+                        Text("Ir al articulo")
+                            .foregroundStyle(.black)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
@@ -369,7 +337,7 @@ struct NoticiaPost: View {
             .foregroundColor(.gray)
             .frame(height: 44)
         }
-        .background(Color(.systemBackground))
+        .background()
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         .padding(.horizontal, 16)
@@ -379,34 +347,118 @@ struct NoticiaPost: View {
 
 struct StoryCard: View {
     let noticia: Noticia
+    let imageName: String
     
     var body: some View {
         VStack {
-            Image(noticia.imagen)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 160)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(
-                            LinearGradient(
-                                gradient: Gradient(colors: [Color("MHBlue"), Color.purple]),
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 2
+            HStack {
+                VStack {
+                    Image("History3")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 160)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color(.red), Color.purple]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 2
+                                )
                         )
-                )
-                .shadow(radius: 3)
-            
-            Text(noticia.titulo)
-                .font(.caption)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .frame(width: 100)
-                .padding(.top, 4)
+                        .shadow(radius: 3)
+                    Text(noticia.titulo)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .frame(width: 100)
+                        .padding(.top, 4)
+                }
+                
+                VStack {
+                    Image("History1")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 160)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color(.red), Color.purple]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 2
+                                )
+                        )
+                        .shadow(radius: 3)
+                    Text(noticia.titulo)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .frame(width: 100)
+                        .padding(.top, 4)
+                }
+                VStack {
+                    Image("History4")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 160)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color(.red), Color.purple]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 2
+                                )
+                        )
+                        .shadow(radius: 3)
+                    Text(noticia.titulo)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .frame(width: 100)
+                        .padding(.top, 4)
+                }
+                VStack {
+                    Image("History2")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 160)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(
+                                    LinearGradient(
+                                        gradient: Gradient(colors: [Color(.red), Color.purple]),
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 2
+                                )
+                        )
+                        .shadow(radius: 3)
+                    Text(noticia.titulo)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(2)
+                        .frame(width: 100)
+                        .padding(.top, 4)
+                }
+
+            }
         }
     }
 }
@@ -421,7 +473,7 @@ struct Noticia: Identifiable {
 
 // Extensión para el color personalizado
 extension Color {
-    static let mhBlue = Color("MHBlue") // Azul característico de Miguel Hidalgo
+    static let mhBlue = Color(.blue) // Azul característico de Miguel Hidalgo
 }
 
 struct LocalNewsView_Previews: PreviewProvider {
