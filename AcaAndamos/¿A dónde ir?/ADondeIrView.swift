@@ -4,6 +4,12 @@
 //
 //  Created by CEDAM 11 on 31/03/25.
 //
+//
+//  ADondeIr.swift
+//  AcaAndamos
+//
+//  Created by CEDAM 11 on 31/03/25.
+//
 
 import Combine
 import ARKit
@@ -24,7 +30,7 @@ struct DondeIrView: View {
             nombre: "Museo Frida Kahlo",
             descripcion: "La Casa Azul, hogar de la artista más icónica de México",
             categoria: "Cultura",
-            imagen: "frida_kahlo",
+            imagen: "Frida_Kahlo",
             ubicacion: CLLocationCoordinate2D(latitude: 19.3554, longitude: -99.1622),
             horario: "10:00 - 17:30",
             precio: "$250 MXN"
@@ -42,7 +48,7 @@ struct DondeIrView: View {
             nombre: "Palacio de Bellas Artes",
             descripcion: "Arquitectura art nouveau y murales famosos",
             categoria: "Históricos",
-            imagen: "bellas_artes",
+            imagen: "Bellas_artes",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412),
             horario: "11:00 - 17:00",
             precio: "$80 MXN"
@@ -51,7 +57,7 @@ struct DondeIrView: View {
             nombre: "Zócalo de la Ciudad de México",
             descripcion: "Plaza principal con historia azteca y colonial, corazón político y cultural",
             categoria: "Históricos",
-            imagen: "zocalo",
+            imagen: "Zocalo",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4326, longitude: -99.1332),
             horario: "Todo el día",
             precio: "Gratis"
@@ -61,7 +67,7 @@ struct DondeIrView: View {
             nombre: "Museo Nacional de Antropología",
             descripcion: "Tesoro de culturas prehispánicas con la Piedra del Sol como pieza estrella",
             categoria: "Cultura",
-            imagen: "museo_antropologia",
+            imagen: "MuseoAntropologia",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4260, longitude: -99.1861),
             horario: "09:00 - 19:00",
             precio: "$90 MXN"
@@ -70,7 +76,7 @@ struct DondeIrView: View {
             nombre: "Xochimilco",
             descripcion: "Canales prehispánicos donde navegar en trajineras con música y comida",
             categoria: "Naturaleza",
-            imagen: "xochimilco",
+            imagen: "Xochimilco",
             ubicacion: CLLocationCoordinate2D(latitude: 19.2674, longitude: -99.1063),
             horario: "09:00 - 18:00",
             precio: "$500 MXN por trajinera (hasta 10 personas)"
@@ -80,7 +86,7 @@ struct DondeIrView: View {
             nombre: "Castillo de Chapultepec",
             descripcion: "Único castillo real en América, con vista panorámica de la ciudad",
             categoria: "Históricos",
-            imagen: "castillo_chapultepec",
+            imagen: "CastilloChapultepec",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4206, longitude: -99.1817),
             horario: "09:00 - 17:00",
             precio: "$90 MXN"
@@ -90,7 +96,7 @@ struct DondeIrView: View {
             nombre: "Mercado de Coyoacán",
             descripcion: "Colorido mercado con artesanías y comida tradicional como quesadillas de huitlacoche",
             categoria: "Gastronomía",
-            imagen: "mercado_coyoacan",
+            imagen: "MercadoCoyoacan",
             ubicacion: CLLocationCoordinate2D(latitude: 19.3494, longitude: -99.1613),
             horario: "08:00 - 20:00",
             precio: "$50-$150 MXN por platillo"
@@ -100,7 +106,7 @@ struct DondeIrView: View {
             nombre: "Torre Latinoamericana",
             descripcion: "Mirador con vistas 360° y museo de la historia de la ciudad",
             categoria: "Entretenimiento",
-            imagen: "torre_latino",
+            imagen: "TorreLatino",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4339, longitude: -99.1406),
             horario: "09:00 - 22:00",
             precio: "$150 MXN"
@@ -110,7 +116,7 @@ struct DondeIrView: View {
             nombre: "Biblioteca Vasconcelos",
             descripcion: "Joy arquitectónica con libros flotantes y jardín botánico",
             categoria: "Cultura",
-            imagen: "vasconcelos",
+            imagen: "BibliotecaVasconcelos",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4406, longitude: -99.1528),
             horario: "08:30 - 19:30",
             precio: "Gratis"
@@ -120,7 +126,7 @@ struct DondeIrView: View {
             nombre: "Salón Corona",
             descripcion: "Cantina clásica fundada en 1928 con los mejores tacos de canasta",
             categoria: "Gastronomía",
-            imagen: "salon_corona",
+            imagen: "SalonCorona",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4350, longitude: -99.1405),
             horario: "12:00 - 02:00",
             precio: "$80-$200 MXN"
@@ -130,7 +136,7 @@ struct DondeIrView: View {
             nombre: "Foro Sol",
             descripcion: "El escenario más grande para conciertos con capacidad para 65,000 personas",
             categoria: "Entretenimiento",
-            imagen: "foro_sol",
+            imagen: "ForoSol",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4047, longitude: -99.0973),
             horario: "Varía por evento",
             precio: "$500-$3000 MXN"
@@ -140,7 +146,7 @@ struct DondeIrView: View {
             nombre: "MUAC (Museo Universitario Arte Contemporáneo)",
             descripcion: "Vanguardia artística en la UNAM con obras de artistas internacionales",
             categoria: "Cultura",
-            imagen: "muac",
+            imagen: "MUAC",
             ubicacion: CLLocationCoordinate2D(latitude: 19.3276, longitude: -99.1836),
             horario: "10:00 - 18:00",
             precio: "$40 MXN"
@@ -149,7 +155,7 @@ struct DondeIrView: View {
             nombre: "Basílica de Guadalupe",
             descripcion: "Santuario religioso más visitado de América, hogar de la Virgen Morena",
             categoria: "Históricos",
-            imagen: "basilica",
+            imagen: "Basilica",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4846, longitude: -99.1173),
             horario: "06:00 - 21:00",
             precio: "Gratis"
@@ -158,7 +164,7 @@ struct DondeIrView: View {
             nombre: "Casa de los Azulejos",
             descripcion: "Palacio barroco del siglo XVI con fachada de cerámica de Puebla",
             categoria: "Históricos",
-            imagen: "azulejos",
+            imagen: "Azulejos",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4344, longitude: -99.1403),
             horario: "07:00 - 22:00",
             precio: "$200 MXN (consumición mínima en café)"
@@ -168,7 +174,7 @@ struct DondeIrView: View {
             nombre: "Museo Soumaya",
             descripcion: "Colección privada con obras de Dalí y Rodin en edificio futurista",
             categoria: "Cultura",
-            imagen: "soumaya",
+            imagen: "Soumaya",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4419, longitude: -99.2056),
             horario: "10:30 - 18:30",
             precio: "Gratis"
@@ -178,7 +184,7 @@ struct DondeIrView: View {
             nombre: "Parque La Mexicana",
             descripcion: "Área verde moderna con lago artificial y pistas para correr",
             categoria: "Naturaleza",
-            imagen: "parque_mexicana",
+            imagen: "LaMexicana",
             ubicacion: CLLocationCoordinate2D(latitude: 19.3788, longitude: -99.2625),
             horario: "06:00 - 23:00",
             precio: "Gratis"
@@ -188,7 +194,7 @@ struct DondeIrView: View {
             nombre: "Pujol",
             descripcion: "Restaurante estrella Michelin con menú degustación de alta cocina mexicana",
             categoria: "Gastronomía",
-            imagen: "pujol",
+            imagen: "Pujol",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4268, longitude: -99.1936),
             horario: "13:00 - 21:00",
             precio: "$2,500 MXN (menú)"
@@ -198,7 +204,7 @@ struct DondeIrView: View {
             nombre: "Arena México",
             descripcion: "Catedral de la lucha libre con eventos los martes, viernes y domingos",
             categoria: "Entretenimiento",
-            imagen: "arena_mexico",
+            imagen: "Arena",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4195, longitude: -99.1558),
             horario: "Eventos nocturnos",
             precio: "$200-$1,500 MXN"
@@ -208,7 +214,7 @@ struct DondeIrView: View {
             nombre: "Museo del Juguete Antiguo (MUJAM)",
             descripcion: "Colección nostálgica de 45,000 juguetes mexicanos de los años 30-90",
             categoria: "Cultura",
-            imagen: "mujam",
+            imagen: "MUJAM",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4430, longitude: -99.1428),
             horario: "09:00 - 18:00",
             precio: "$100 MXN"
@@ -218,7 +224,7 @@ struct DondeIrView: View {
             nombre: "Tianguis Cultural del Chopo",
             descripcion: "Mercado alternativo de música, arte y moda underground",
             categoria: "Entretenimiento",
-            imagen: "chopo",
+            imagen: "Chopo",
             ubicacion: CLLocationCoordinate2D(latitude: 19.4414, longitude: -99.1470),
             horario: "Sábados 11:00 - 18:00",
             precio: "Gratis (compras variables)"
@@ -373,6 +379,7 @@ struct RandomRouteButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "dice.fill")
+                .foregroundStyle(.blue)
         }
     }
 }
@@ -435,7 +442,7 @@ struct MapView: UIViewRepresentable {
             
             let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "lugar")
             annotationView.glyphImage = UIImage(systemName: "mappin.circle.fill")
-            annotationView.markerTintColor = UIColor(Color("CDMXBlue"))
+            annotationView.markerTintColor = UIColor(Color(.pink))
             return annotationView
         }
     }
@@ -474,7 +481,7 @@ class ARViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func añadirLugaresEnAR() {
-        for lugar in lugares {
+        for _ in lugares {
             let node = SCNNode()
             node.geometry = SCNSphere(radius: 0.1)
             node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
@@ -534,7 +541,7 @@ struct LugarCard: View {
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                        .stroke(Color.blue.opacity(0.2), lineWidth: 1)
                 )
             
             // Detalles del lugar
@@ -583,7 +590,7 @@ struct LugarCard: View {
             
             // Ícono de navegación
             Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+                .foregroundColor(.blue)
         }
         .padding()
         .background(Color(.secondarySystemBackground))
@@ -602,14 +609,18 @@ struct LugarDetailView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(height: 250)
+                    
+                    .cornerRadius(30)
+                    
                     .clipped()
                     .overlay(
                         LinearGradient(
-                            gradient: Gradient(colors: [.clear, .black.opacity(0.3)]),
+                            gradient: Gradient(colors: [.clear, .blue.opacity(0.3)]),
                             startPoint: .top,
                             endPoint: .bottom
                         )
                     )
+                    
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(lugar.nombre)
@@ -644,11 +655,17 @@ struct LugarDetailView: View {
                     .tint(.accentColor)
                     .padding(.top)
                 }
-                .padding()
+                .padding(30)
             }
+            .padding(.horizontal)
         }
         .navigationTitle("Detalle")
         .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 
+#Preview {
+    
+    DondeIrView()
+}

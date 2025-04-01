@@ -4,6 +4,7 @@
 //
 //  Created by CEDAM 11 on 31/03/25.
 //
+
 import SwiftUI
 import CoreLocation
 
@@ -21,21 +22,20 @@ struct ContentView: View {
                 // Barra superior
                 HStack {
                     HStack {
-                        HStack(spacing: 8) {
-                            Image(systemName: weatherIcon)
-                                .foregroundColor(.yellow)
-                                .font(.title3)
-                                
-                            Text(temperature)
-                                .foregroundColor(.black)
-                                .bold()
-                                .font(.title3)
-                        }
-                        .padding(10)
-//                        .background(.white)
-                        .cornerRadius(10)
+                        Image("logo")
+                            .resizable()
+                            .frame(width: 50, height: 50, alignment: .center)
+                            .scaledToFit()
+                        Spacer()
+                        Text("24°C")
+                            .font(.title3)
+                            .bold()
+                        
+                        Image(systemName: "sun.max.fill")
+                            .foregroundStyle(.red)
+                            
                     }
-                    .padding(20)
+                    .padding(10)
                     .background(.pink.opacity(0.001))
                     .cornerRadius(10)
                     Spacer()
@@ -44,7 +44,7 @@ struct ContentView: View {
                         showingNotifications.toggle()
                     }) {
                         Image(systemName: "bell.fill")
-                            .foregroundColor(.blue)
+                            .foregroundColor(.black)
                             .padding()
                     }
                     .sheet(isPresented: $showingNotifications) {
@@ -89,6 +89,7 @@ struct ContentView: View {
                         }
                         .background(Color.pink.opacity(0.2))
                 }
+                
                
             }
         }

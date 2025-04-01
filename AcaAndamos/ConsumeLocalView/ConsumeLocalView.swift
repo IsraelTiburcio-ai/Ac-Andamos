@@ -4,7 +4,6 @@
 //
 //  Created by CEDAM 11 on 31/03/25.
 //
-
 import SwiftUI
 
 struct ConsumeLocalView: View {
@@ -18,7 +17,7 @@ struct ConsumeLocalView: View {
             name: "Mercado de Polanco",
             description: "Productos frescos y locales en el corazón de Polanco",
             category: "Mercados",
-            image: "mercado_polanco",
+            images: ["mercado1", "mercado2", "mercado3"], // Múltiples imágenes
             rating: 4.8,
             distance: 1.2,
             isFeatured: true
@@ -27,7 +26,7 @@ struct ConsumeLocalView: View {
             name: "Cafetería Avellaneda",
             description: "Café de especialidad tostado localmente",
             category: "Cafeterías",
-            image: "cafeteria_avellaneda",
+            images: ["cafe1", "cafe2", "cafe3"],
             rating: 4.7,
             distance: 0.8,
             isFeatured: true
@@ -36,7 +35,7 @@ struct ConsumeLocalView: View {
             name: "Tacos Don José",
             description: "Los mejores tacos al pastor de la zona",
             category: "Restaurantes",
-            image: "tacos_don_jose",
+            images: ["tacos1", "tacos2", "tacos3"],
             rating: 4.5,
             distance: 1.5,
             isFeatured: false
@@ -45,7 +44,7 @@ struct ConsumeLocalView: View {
             name: "Artesanías Oaxaqueñas MH",
             description: "Productos tradicionales hechos por artesanos locales",
             category: "Artesanías",
-            image: "artesanias_mh",
+            images: ["artesania1", "artesania2", "artesania3"],
             rating: 4.9,
             distance: 2.1,
             isFeatured: false
@@ -54,7 +53,7 @@ struct ConsumeLocalView: View {
             name: "Panadería La Esperanza",
             description: "Pan tradicional hecho diariamente",
             category: "Tiendas",
-            image: "panaderia_esperanza",
+            images: ["panaderia1", "panaderia2", "panaderia3"],
             rating: 4.6,
             distance: 0.5,
             isFeatured: true
@@ -85,7 +84,7 @@ struct ConsumeLocalView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             ForEach(categories, id: \.self) { category in
-                                CategoryPill(
+                                CategoryPill2(
                                     category: category,
                                     isSelected: selectedCategory == category,
                                     action: { selectedCategory = category }
@@ -172,12 +171,12 @@ struct CategoryPill2: View {
                 .font(.system(size: 14, weight: .medium))
                 .padding(.horizontal, 15)
                 .padding(.vertical, 8)
-                .foregroundColor(isSelected ? .white : Color("MHBlue"))
-                .background(isSelected ? Color(.green) : Color(.systemBackground))
+                .foregroundColor(isSelected ? .white : Color(.black))
+                .background(isSelected ? Color(.pink) : Color(.systemBackground))
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color("MHBlue"), lineWidth: isSelected ? 0 : 1)
+                        .stroke(Color(.pink), lineWidth: isSelected ? 0 : 1)
                 )
         }
         .buttonStyle(PlainButtonStyle())
@@ -186,22 +185,32 @@ struct CategoryPill2: View {
 
 struct FeaturedBusinessCard: View {
     let business: LocalBusiness
+    @State private var currentImageIndex = 0
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(business.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 200, height: 120)
-                .clipped()
-                .cornerRadius(10)
-                .overlay(
-                    LinearGradient(
-                        gradient: Gradient(colors: [.clear, .black.opacity(0.3)]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
+            // Carrusel de imágenes para negocios destacados
+            TabView(selection: $currentImageIndex) {
+                ForEach(0..<business.images.count, id: \.self) { index in
+                    Image(business.images[index])
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 200, height: 120)
+                        .clipped()
+                        .cornerRadius(10)
+                        .overlay(
+                            LinearGradient(
+                                gradient: Gradient(colors: [.clear, .black.opacity(0.3)]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .tag(index)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+            .frame(width: 200, height: 120)
+            .cornerRadius(10)
             
             Text(business.name)
                 .font(.headline)
@@ -229,18 +238,27 @@ struct FeaturedBusinessCard: View {
 
 struct BusinessCard: View {
     let business: LocalBusiness
+    @State private var currentImageIndex = 0
     
     var body: some View {
         HStack(spacing: 12) {
-            Image(business.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 80, height: 80)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                )
+            // Carrusel de imágenes para la vista de lista
+            TabView(selection: $currentImageIndex) {
+                ForEach(0..<business.images.count, id: \.self) { index in
+                    Image(business.images[index])
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 80, height: 80)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                        )
+                        .tag(index)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+            .frame(width: 80, height: 80)
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(business.name)
@@ -278,14 +296,14 @@ struct BusinessCard: View {
     }
 }
 
-// MARK: - Modelo de Datos
+// MARK: - Modelo de Datos Actualizado
 
 struct LocalBusiness: Identifiable {
     let id = UUID()
     let name: String
     let description: String
     let category: String
-    let image: String
+    let images: [String] // Ahora es un array de nombres de imágenes
     let rating: Double
     let distance: Double // en km
     let isFeatured: Bool
